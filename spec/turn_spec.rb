@@ -1,4 +1,5 @@
 require './lib/card'
+require './lib/turn'
 
 RSpec.describe Turn do
   it 'exists' do
@@ -28,11 +29,18 @@ RSpec.describe Turn do
 
     expect(turn.correct?).to eq(true)
   end
-  
+
   it 'has feedback' do
     card = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
     turn = Turn.new("Juneau", card)
 
     expect(turn.feedback).to eq("Correct!")
+  end
+
+  it 'can handle incorrect answers' do
+    card = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
+    turn = Turn.new("Saturn", card)
+
+    expect(turn.feedback).to eq("Incorrect.")
   end
 end
